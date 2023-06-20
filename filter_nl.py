@@ -4,6 +4,8 @@ import re
 import argparse
 import csv
 
+from operator import itemgetter
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="")
@@ -40,7 +42,7 @@ def main():
 
     prefix = args.prefix if args.prefix else ""
     postfix = args.postfix if args.postfix else ""
-
+    concept_list = sorted(concept_list, key=itemgetter(0, 1, 2))
     with open(args.output_path, "w") as f:
         writer = csv.writer(f)
         for concept in concept_list:
