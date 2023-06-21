@@ -30,7 +30,9 @@ def main():
     with open(args.input_path) as f:
         reader = csv.reader(f)
         for line in reader:
-            if line[DICT_TYPE] == args.key:
+            if line[DICT_TYPE] == args.key and line[DESCR] != "NaN":
+
+
                 # print(line)
                 concept_list.append([line[DICT_TYPE], line[CONCEPT_NAME], line[DESCR]])
 
@@ -40,7 +42,7 @@ def main():
     with open(args.output_path, "w") as f:
         writer = csv.writer(f)
         for concept in concept_list:
-            writer.writerow([concept[1], prefix + concept[1].strip() + postfix])
+            writer.writerow([concept[1], concept[2].strip()])
 
     return 0
 
